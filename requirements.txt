@@ -1,0 +1,9 @@
+numpy
+pandas
+scipy
+matplotlib>=3.7.1
+xgboost==1.7.5
+scikit_learn
+caelus @ git+https://github.com/jararias/caelus@main
+loguru
+tqdm
