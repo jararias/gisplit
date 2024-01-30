@@ -2,13 +2,13 @@
 
 A Python implementation of the GISPLIT global solar irradiance component-separation model for 1-min data, described in (open access):
 
->>>
-Ruiz-Arias, J.A. and Gueymard, C.A. (2024) GISPLIT: High-performance global solar irradiance component-separation model dynamically constrained by 1-min sky conditions. _Solar Energy_ XXX doi: [10.1016/j.solener.2024.112363](https://doi.org/10.1016/j.solener.2024.112363)
->>>
+>Ruiz-Arias, J.A. and Gueymard, C.A. (2024) GISPLIT: High-performance global solar irradiance component-separation model dynamically constrained by 1-min sky conditions. _Solar Energy_ XXX doi: [10.1016/j.solener.2024.112363](https://doi.org/10.1016/j.solener.2024.112363)
 
 <p align="center">
     <img src="assets/gisplit_diag.png" alt="GISPLIT diagnostics">
 </p>
+
+EXPLICAR QUE ESTA BASADO EN CAELUS
 
 
 ### Installation
@@ -31,7 +31,7 @@ and run there the tests:
 python3 -c "import splitting_models.tests as sm_tests; sm_tests.basic_test()"
 ```
 
-from the command-line or:
+from the command-line interface or:
 
 ```python
 import pylab as pl
@@ -42,7 +42,14 @@ pl.show()
 
 in a python script.
 
-### Brief use notes
+### Usage notes
+
+First, you must create a GISPLIT instance:
+
+```python
+from gisplit import GISPLIT
+gs = GISPLIT(   )
+```
 
 Given a pandas Dataframe `data` with all required fields (see below), and assuming that it has a time
 index with 10-min resolution, the splitting is as follows:
