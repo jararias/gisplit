@@ -61,7 +61,7 @@ It accepts two input arguments:
 - `climate`, to select a model version trained especifically for one of the primary Koeppen-Geiger climates (namely, `'A'`, `'B'`, `'C'`, `'D'` or `'E'`; [:mag:](https://en.wikipedia.org/wiki/K%C3%B6ppen_climate_classification)), or set to `None` to use the _all-climates_ version (default option).
 
 > [!TIP]
-> The benefits of using a climate-specific model versions are not clear (see the paper above). I recommend to use the _all-climates_ version (i.e., `climate=None`). In any case, use a climate-wise version only if you know the Koeppen-Geiger primary climate of your targetted location.
+> The benefits of using climate-specific model versions are not clear (see the paper above). I recommend to use the _all-climates_ version (i.e., `climate=None`). In any case, use a climate-wise version only if you know the Koeppen-Geiger primary climate of your targetted location.
 
 #### GHI separation and required input data
 
@@ -76,7 +76,7 @@ where `data` is a Pandas [DataFrame](https://pandas.pydata.org/docs/reference/ap
 - `sza`: the solar zenith angle, in degrees
 - `eth`: the extraterrestrial solar irradiance, in W/m$`^2`$
 - `ghi`: the global horizontal irradiance, in W/m$`^2`$
-- `ghics`: the clear-sky global horizontal irradiacne, in W/m$`^2`$
+- `ghics`: the clear-sky global horizontal irradiance, in W/m$`^2`$
 - `difcs`: the clear-sky diffuse irradiance, in W/m$`^2`$
 
 and, in addition, it requires:
@@ -98,17 +98,16 @@ or, you could do:
 pred = gs.predict(data, sky_type_or_func=lambda df: df.sky_type.values)
 ```
 
+The `sky_type_or_func` argument accepts a Pandas Series or numpy 1-d array of CAELUS sky types with the same length as `data`, or a function that returns the sky type and receives `data` as input. 
+
 > [!TIP]
 > If the sky type has been pre-computed, use it in `predict` because this accelerates the separation and eliminates the requirement of `longitude` and `ghicda`.
 
 > [!TIP]
-> If you are sure that the sky type is aligned with the rest of values in `data`, use the `.values` attribute of `sky_type` to prevent dataframe index alignment issues that can be raised eventually.
-
-The `sky_type_or_func` argument accepts a Pandas Series or numpy 1-d array of CAELUS sky types with the same length as `data`, or a function that returns the sky type and receives `data` as input. 
+> If you are sure that the sky type is aligned with the rest of values in `data`, use the `.values` attribute of `sky_type` to prevent dataframe index alignment issues that could be raised eventually.
 
 > [!IMPORTANT]
-> The DataFrame should be full, that is, without time gaps. This is so because, during the prediction, GISPLIT
-uses moving windows to calculate variability indices that assume that the time series in the DataFrame are continuous
+> The data gaps in the input dataframe should be kept at a minimum because the sky-type classification and the components separation rely on variability indicators that are evaluated with centered moving windows. The data gaps may deteriorate the value of these indicators and, as a result, the model performance may be deteriorated as well.
 
 ##### Notes on the input dataframe's index
 
