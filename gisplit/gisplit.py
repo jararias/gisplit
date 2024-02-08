@@ -54,9 +54,6 @@ def safe_multisite(func, df, **kwargs):
     return func(df, **kwargs)
 
 
-# TODO: To implement GISPLIT by climate. Perhaps, a
-#       wrapper with one object for each climate???
-
 class GISPLIT:
 
     def __init__(self, engine='xgb', climate=None, **kwargs):
