@@ -161,10 +161,8 @@ class GISPLIT:
     @staticmethod
     def get_param_dir():
         # param_dir = Path(__file__).parent / 'parameters/'
-        try:
-            param_dir = importlib.resources.path('gisplit', 'parameters')
-        except AttributeError:
-            param_dir = importlib.resources.files('gisplit.parameters').joinpath('')
+        # param_dir = importlib.resources.path('gisplit', 'parameters')
+        param_dir = importlib.resources.files('gisplit.parameters').joinpath('')
         if not param_dir.exists():
             raise ValueError(f'missing parameters directory `{param_dir.absolute()}`')
         return param_dir
