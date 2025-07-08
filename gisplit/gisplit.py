@@ -162,7 +162,11 @@ class GISPLIT:
     def get_param_dir():
         # param_dir = Path(__file__).parent / 'parameters/'
         # param_dir = importlib.resources.path('gisplit', 'parameters')
-        param_dir = importlib.resources.files('gisplit.parameters').joinpath('')
+        try:
+            param_dir = importlib.resources.files('gisplit.parameters').joinpath('')
+        except StopIteration:
+            # to prevent an apparent regression problem with MultiPlexedPath
+            param_dir = importlib.resources.files('gisplit.parameters')._paths[0]
         if not param_dir.exists():
             raise ValueError(f'missing parameters directory `{param_dir.absolute()}`')
         return param_dir
