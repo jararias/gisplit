@@ -305,7 +305,8 @@ class GISPLIT:
                 if domain.sum() == 0:
                     continue
                 logger.debug(f'Predicting {sky_t.name} sky: {domain.sum()} instances')
-                pred_.loc[domain] = self.get_splitting_model(sky_t).predict(df.loc[domain])
+                pred_.loc[domain] = (self.get_splitting_model(sky_t)
+                                     .predict(df.loc[domain]).astype(float))
             return pred_
 
         pred = safe_multisite(splitter, datain)
