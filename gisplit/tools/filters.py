@@ -110,7 +110,7 @@ def add_latitude(df, metadata):
 def rolling_mean(series, window='1H', **kwargs):
     kwargs.setdefault('min_periods', 1)
     kwargs.setdefault('center', True)
-    return series.rolling(window, **kwargs).mean()
+    return series.rolling(window.replace("T", "min"), **kwargs).mean()
 
 
 def rolling_sum(series, window='1H', **kwargs):
