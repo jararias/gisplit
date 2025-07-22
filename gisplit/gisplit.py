@@ -299,7 +299,7 @@ class GISPLIT:
         datain = self._check_and_prepare_input_data(data, sky_type_or_func, **kwargs)
 
         def splitter(df):
-            pred_ = pd.DataFrame(index=df.index, columns=['dif', 'dir', 'dni'], dtype='f4')
+            pred_ = pd.DataFrame(index=df.index, columns=['dif', 'dir', 'dni'], dtype=float)
             for sky_t in self.sky_type.iterate(skip_unknown=True):
                 domain = df['sky_type'] == sky_t.value
                 if domain.sum() == 0:
